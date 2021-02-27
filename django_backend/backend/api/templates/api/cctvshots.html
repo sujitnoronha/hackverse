@@ -1,0 +1,21 @@
+ {% extends 'api/base.html' %}
+ {% block content %}
+    <div class="container-fluid" style="padding:120px 10px;">
+        <div class="row">
+        {% for s in stat %}
+        <div class="col-xl-12 col-sm-12 text-center">
+            <h2 class="content-title">Location - {{ s.location }}</h2>
+            {% if s.sceneimage %}
+            <img class="img-fluid rounded" style="width:400px; max-height:400px;" src="{{ s.sceneimage.url }}">
+            {% endif %}
+            <br>
+            <button style="margin-top:10px;" class="btn btn-primary">Detect people in scene</button>
+            <button style="margin-top:10px;" class="btn btn-success">Scene Details</button>
+
+        </div>
+
+        {% endfor%}
+        </div>
+    </div>
+
+ {% endblock content%}

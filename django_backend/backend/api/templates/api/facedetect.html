@@ -1,0 +1,19 @@
+ {% extends 'api/base.html' %}
+ {% block content %}
+ <div class="page-wrapper">
+    <div class="content-wrapper">
+ <div class="container-fluid" style="padding-top:64px;">
+    <div class="content">
+        <h1 class="content-title">{{ count }} people detected</h1>
+        <img class="image-fluid rounded" src="{{scene.sceneimage.url }}" style="width:100%;max-width:500px;" /><br> 
+        <h3>{{ pred|length }} Criminals found</h3>
+        {% for p in pred %} 
+        
+        <p class="font-weight-bolder">{{p}} Detected -- <button class="btn btn-primary">Details</button></p> 
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+</div>
+ {% endblock content %}

@@ -1,0 +1,130 @@
+{% extends 'api/base.html' %} {% block content %}
+<!-- Navbar end -->
+
+<!-- Content wrapper start -->
+
+<!-- Page wrapper with content-wrapper inside -->
+<div class="page-wrapper">
+    <div class="content-wrapper">
+        <!-- Container-fluid -->
+        <div class="container-fluid" style="padding-top:64px;">
+            <!-- First comes a content container with the main title -->
+            <div class="content">
+                <h1 class="content-title font-size-22">
+                    <!-- font-size-22 = font-size: 2.2rem (22px) -->
+                    Dashboard
+                </h1>
+                Scene data in the past 5 mins.
+            </div>
+            <!-- First row (equally spaced) -->
+            <div class="row row-eq-spacing">
+                <div class="col-6 col-xl-3">
+                    <div class="card">
+                        <h2 class="card-title">People</h2>
+                        <p class="font-size-22 m-0 p-0 font-weight-bold">{{ last.peoplecount }}</p>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3">
+                    <div class="card">
+                        <h2 class="card-title">Location</h2>
+                        <p class="font-size-22 m-0 p-0">{{ last.location|upper }}</p>
+                    </div>
+                </div>
+                <!-- Overflow occurs here on large screens (and down) -->
+                <!-- Therefore, a v-spacer is added at this point -->
+                <div class="v-spacer d-xl-none"></div>
+                <!-- d-xl-none = display: none only on extra large screens (> 1200px) -->
+                <div class="col-6 col-xl-3">
+                    <div class="card">
+                        <h2 class="card-title">Violations</h2>
+                        <p class="font-size-22 m-0 p-0 font-weight-bold">{{ last.socialdistancing}}</p>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3">
+                    <div class="card">
+                        <h2 class="card-title">Status</h2>
+                        <p class="font-size-22 m-0 p-0 text-primary font-weight-bold"> {{ last.scenedetect|upper}} </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Second row (equally spaced on large screens and up) -->
+            <div class="content">
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+            <!-- Third row (equally spaced on large screens and up) -->
+            <div class="row row-eq-spacing-lg">
+                <div class="col-lg-6">
+                    <div class="content">
+                        <h2 class="content-title">Scene Image</h2>
+                        <img src="{{ last.sceneimage.url }}" style="width:100%;" class="img-fluid" /><br>
+                        <div class="pt-10">
+                            <a href="{% url 'facedetector' id=last.id %}" class=" btn btn-primary btn-block ">Detect Faces</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="content ">
+                        <h2 class="content-title ">Past Activity log <span class="badge badge-primary">Last 5</span></h2>
+                        {% for s in stat %}
+                        <p><strong>{{ s.scenedetect|upper}}</strong> - {{ s.time|date:"dS F: h:i:s a" }}</p>
+
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content wrapper end -->
+
+</div>
+<!-- Page wrapper end -->
+
+<!-- Halfmoon JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js " integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin=" anonymous "></script>
+<script type="text/javascript ">
+
+    var ctx = document.getElementById('myChart');
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['5min. ago','4min. ago', '3min. ago', '2min. ago', '1min. ago','now',],
+            datasets: [{
+
+                backgroundColor: 'rgb(54, 162, 235,0.5)',
+                borderColor: '#ffffff',
+                data: {{pcount|safe }},
+                label: 'No. of people',
+                fill: true,
+                showLine: true,
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            spanGaps: false,
+            elements: {
+                line: {
+                    tension: 0.4,
+                }
+            },
+            plugins: {
+                filler: {
+                    propagate: false
+                }
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        autoSkip: false,
+                        maxRotation: 0
+                    }
+                }]
+            }
+        }
+    });
+</script>
+{% endblock content %}
