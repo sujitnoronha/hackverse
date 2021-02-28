@@ -1,4 +1,5 @@
 <p align="center">
+  <h1 align="center">Hackverse-2.0</h1>
   <h1 align="center">RIM.ai - An Ai based surveillance system</h1>
 </p>
 
@@ -74,7 +75,7 @@ You should have the specific OpenVino version installed (openvino 2020.4.287).
 
 
 ## Contributors
-Developed by <a href="https://github.com/sujitnoronha">Sujit Noronha </a> , <a href="https://github.com/dylandsouza00"> Dylan Dsouza</a> , <a href="https://github.com/akshaye27">Akshaye Nair</a>.
+Developed by <a href="https://github.com/sujitnoronha">Sujit Noronha </a> , <a href="https://github.com/dylandsouza00"> Dylan Dsouza</a> , <a href="https://github.com/FrankyPinto">Franky Pinto</a>.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
