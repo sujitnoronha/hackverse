@@ -58,19 +58,39 @@ You should have the specific OpenVino version installed (openvino 2020.4.287).
 * [Python 3.7](https://www.python.org/downloads/release/python-370/)
 
 
+### Add necessary folders and files to the project
+* [DriveLink](https://drive.google.com/drive/folders/1up-4amoZv49FnDrswRbb8pQlAEKAlxJ7)
+add these folders to the main directory of the project 
+* model/
+* vid/
+* data/
+* create a model folder in the django_backend/backend/api/ folder add the facemodel contents in the folder 
+
 ### Installation
 
 1. Clone the repo
    ```sh
    git clone https://github.com/sujitnoronha/researchinmotion.git
    ```
-3. Install python packages
+2. Install python packages
    ```sh
    pip install -r requirements.txt
    ```
-4. Run your project.
+3. Run your project.
    ```sh
    python vino.inf.py
+   ```
+
+
+
+### Running the Server
+ 1. get to the backend directory
+ ```sh
+ cd django_backend/backend 
+ ```
+2. Install python packages
+   ```sh
+   pip install -r requirements.txt
    ```
 
 
